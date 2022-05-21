@@ -31,7 +31,6 @@ const FetchImages = ({ searchText }) => {
   const onSuccessImagesCollected = (images) => {
     setApiState(apiStatusConstants.success);
     setImageResult(images.hits);
-    console.log(images.hits);
   };
   const onFailureImagesCollected = () => {
     setApiState(apiStatusConstants.failure);
