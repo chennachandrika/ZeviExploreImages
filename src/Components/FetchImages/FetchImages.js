@@ -21,14 +21,14 @@ const FetchImages = ({ searchText }) => {
       const response = await fetch(reposUrl);
       if (response.ok) {
         const Images = await response.json();
-        onSuccessDataCollected(Images);
+        onSuccessImagesCollected(Images);
       } else {
         onFailureImagesCollected();
       }
     };
     getImagesData();
   }, [searchText]);
-  const onSuccessDataCollected = (images) => {
+  const onSuccessImagesCollected = (images) => {
     setApiState(apiStatusConstants.success);
     setImageResult(images.hits);
     console.log(images.hits);
