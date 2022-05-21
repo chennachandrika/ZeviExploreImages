@@ -13,6 +13,17 @@ const apiStatusConstants = {
 const FetchImages = ({ searchText }) => {
   const [apiState, setApiState] = useState(apiStatusConstants.initial);
   useEffect(() => {
+    const getImagesData = async () => {
+      const reposUrl = `${apiUrl}/?key=${apiKey}&q=${searchText}&image_type=photo&safesearch=true`;
+      setApiState(apiStatusConstants.inProgress);
+      const response = await fetch(reposUrl);
+      if (response.ok) {
+        const Images = await response.json();
+        onSuccessDataCollected(Images);
+      } else {
+        onFailureImagesCollected();
+      }
+    };
     getImagesData();
   }, [searchText]);
   const onSuccessDataCollected = (Images) => {
@@ -22,17 +33,7 @@ const FetchImages = ({ searchText }) => {
   const onFailureImagesCollected = () => {
     setApiState(apiStatusConstants.failure);
   };
-  const getImagesData = async () => {
-    const reposUrl = `${apiUrl}/?key=${apiKey}&q=${searchText}&image_type=photo&safesearch=true`;
-    setApiState(apiStatusConstants.inProgress);
-    const response = await fetch(reposUrl);
-    if (response.ok) {
-      const Images = await response.json();
-      onSuccessDataCollected(Images);
-    } else {
-      onFailureImagesCollected();
-    }
-  };
+
   return (
     <ImagesGallary>{apiState === "IN_PROGRESS" && "Loading..."}</ImagesGallary>
   );
