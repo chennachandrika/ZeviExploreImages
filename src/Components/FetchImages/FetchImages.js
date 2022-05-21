@@ -41,7 +41,9 @@ const FetchImages = ({ searchText }) => {
     <ImagesGallary>
       {apiState === apiStatusConstants.inProgress && "Loading..."}
       {apiState === apiStatusConstants.success &&
-        ImageResult.map((item) => <Image previewURL={item.previewURL} />)}
+        ImageResult.map((item) => (
+          <Image key={item.id} previewURL={item.previewURL} />
+        ))}
     </ImagesGallary>
   );
 };
