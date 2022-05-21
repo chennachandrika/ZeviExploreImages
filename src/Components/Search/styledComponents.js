@@ -18,6 +18,9 @@ export const InputWrapper = styled.input`
   font-size: 12px;
   color: #ffffff;
   margin: 10px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 10px;
   @media screen and (min-width: 768px) {
     width: 350px;
   }
